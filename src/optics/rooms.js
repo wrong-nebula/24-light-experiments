@@ -102,6 +102,7 @@ function talbot(w) {
   return {
     pick: frame,
     axis: "x",
+    hintAnchor: [0, 3.88, 0],
     sensitivity: (s) => (1.25 * talbotDistance(s.b)) / 23,
     update(s, m) {
       if (m.carpet) {
@@ -384,6 +385,7 @@ function photoelastic(w) {
   return {
     pick: ram,
     axis: "x",
+    hintAnchor: [3.22, 1.5, 0],
     sensitivity: () => -0.62,
     update(s) {
       ram.position.x = 30.1 - s.a * 1.6;

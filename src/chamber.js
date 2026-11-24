@@ -13,6 +13,7 @@ import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.j
 import { createFinishes, detailBlock } from "./bounce/fixtures.js";
 import { addBounceGeometry, isBounceStudy } from "./bounce/studies.js";
 import { raySegments } from "./ray-paths.js";
+import { addAxisHint } from "./axis-hint.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const neutral = [0.74, 0.76, 0.68],
@@ -337,6 +338,14 @@ export function chamber(
   } else if (reflector >= 0) {
     dragObject = meshes[reflector];
   }
+  const dragGuide = dragObject
+    ? {
+        object: handle ?? dragObject,
+        axis: "z",
+        anchor: [0, handle ? 1 : 0.5, 0],
+      }
+    : solver.dragGuide;
+  const axisHint = dragGuide && addAxisHint(scene, keep, dragGuide);
   let paths;
   if (hasLens) {
     paths = new T.LineSegments(
@@ -560,6 +569,7 @@ export function chamber(
     },
     draw() {
       direction.value.copy(camera.position).sub(controls.target).normalize();
+      axisHint?.update(camera, height, plan);
       renderer.render(scene, camera);
     },
     resetCamera() {

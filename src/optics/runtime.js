@@ -156,6 +156,10 @@ export function createInstrument(id, report, fail) {
       nlos: 0.72 / 0.52,
     }[id],
     ready,
+    get dragGuide() {
+      if (rig?.pick)
+        return { object: rig.pick, axis: rig.axis, anchor: rig.hintAnchor };
+    },
     mount(scene, keep) {
       work = workshop(scene, keep, detector, id);
       rig = rooms[id](work);

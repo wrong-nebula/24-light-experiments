@@ -4,6 +4,8 @@ Twenty-four interactive light-transport experiments share a Three.js r187 cutawa
 
 [Explore Transport Atlas](https://wrong-nebula.github.io/24-light-experiments/) in a WebGPU-capable browser.
 
+In Chamber view, a small double-ended arrow marks each draggable object and shows its direction of travel. Drag the object itself to move it.
+
 ## Run locally
 
 Use Node.js 22 and a WebGPU-capable browser with hardware acceleration enabled.
